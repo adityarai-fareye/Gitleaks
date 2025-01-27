@@ -20,8 +20,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print Branch Name
-        run: echo "Branch Name: ${{ github.ref_name }}"
+      - name: Extract and Print Branch Name
+        run: |
+          branch_name=${GITHUB_REF##*/}
+          echo "Branch Name: $branch_name"
 
     steps:
       - name: Checkout code
