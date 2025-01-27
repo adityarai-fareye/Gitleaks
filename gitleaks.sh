@@ -33,7 +33,7 @@ fetch_first_and_last_commit_for_pull_request() {
     echo "GitHub Token: $GITHUB_TOKEN"
 
     commits=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
-      "https://api.github.com/repos/$REPO/pulls/$PULL_REQUEST_NUMBER/commits")
+      "https://api.github.com/repos/$REPO/pulls/$PULL_REQUEST_NUMBER/commits?per_page=100")
 
     # echo $commits
     if echo "$commits" | jq -e '.[0]' > /dev/null 2>&1; then
