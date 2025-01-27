@@ -23,7 +23,7 @@ check_gitleaks_installed() {
 execute_gitleaks() {
     echo "gitleaks cmd: gitleaks detect --redact -v --exit-code=2 --log-level=debug --log-opts=--no-merges --first-parent $first_commit_sha^..$last_commit_sha"
     echo "Running Gitleaks..."
-    gitleaks detect --redact -v --exit-code=2 --log-level=debug --log-opts="--no-merges --first-parent $first_commit_sha^..$last_commit_sha"
+    gitleaks detect --redact -v --exit-code=2 --log-level=debug --log-opts="--no-merges --first-parent $first_commit_sha^..HEAD --"
 }
 
 REPO="${GITHUB_REPOSITORY}"
@@ -56,3 +56,10 @@ fetch_first_and_last_commit_for_pull_request() {
 fetch_first_and_last_commit_for_pull_request
 check_gitleaks_installed
 execute_gitleaks
+
+
+
+
+
+/usr/bin/git -C . log -p -U0 --no-merges --first-parent e73a44d998131a96a95fd00b6be333ad5bb3dc09^..317573efbd862d05e4ba5c5fe6a0120c2bb89857
+/usr/bin/git -C . log -p -U0 --no-merges --first-parent b2c557f1e7b85545ad8b908bc1faf1ebd1ae0c69^..5f7f84de4642ee159fdbee872765aad67ff9a46d
