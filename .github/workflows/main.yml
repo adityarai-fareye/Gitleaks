@@ -30,10 +30,10 @@ jobs:
       - name: Set execute permission
         run: chmod +x ./gitleaks.sh
       
-      - name: gitleaks
-        run: |
-          branch_name="${{ github.head_ref }}"
-          git -C . log -p -U0 --no-merges --first-parent $branch_name b2c557f1e7b85545ad8b908bc1faf1ebd1ae0c69^..9f8b45fa31137f2050ecd15723992a0525d01c4e
+      # - name: gitleaks
+      #   run: |
+      #     branch_name="${{ github.head_ref }}"
+      #     git -C . log -p -U0 --no-merges --first-parent $branch_name b2c557f1e7b85545ad8b908bc1faf1ebd1ae0c69^..9f8b45fa31137f2050ecd15723992a0525d01c4e
 
-      # - name: Run Gitleaks Scan
-        # run: ./gitleaks.sh "${{ secrets.GITHUB_TOKEN }}" "${{ github.event.pull_request.number}}" "${{ github.head_ref }}"
+      - name: Run Gitleaks Scan
+        run: ./gitleaks.sh "${{ secrets.GITHUB_TOKEN }}" "${{ github.event.pull_request.number}}" "${{ github.head_ref }}"
