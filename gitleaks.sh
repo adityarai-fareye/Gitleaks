@@ -54,5 +54,3 @@ fetch_first_and_last_commit_for_pull_request() {
 fetch_first_and_last_commit_for_pull_request
 check_gitleaks_installed
 execute_gitleaks
-
-
