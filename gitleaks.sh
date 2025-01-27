@@ -4,7 +4,6 @@ set -e
 
 GITHUB_TOKEN="$1"
 PULL_REQUEST_NUMBER="$2"
-BRANCH_NAME="$3"
 
 check_gitleaks_installed() {
     if command -v gitleaks >/dev/null 2>&1; then
@@ -21,8 +20,7 @@ check_gitleaks_installed() {
 }
 
 execute_gitleaks() {
-    echo "Executing command: gitleaks detect --redact -v --exit-code=2 --log-level=debug --log-opts='--no-merges --first-parent $BRANCH_NAME $first_commit_sha^..$last_commit_sha'"
-    # git log --no-merges --first-parent $first_commit_sha^..$last_commit_sha
+    echo "Executing command: gitleaks detect --redact -v --exit-code=2 --log-level=debug --log-opts='--no-merges --first-parent $first_commit_sha^..$last_commit_sha'"
     gitleaks detect --redact -v --exit-code=2 --log-level=debug --log-opts="--no-merges --first-parent $first_commit_sha^..$last_commit_sha"
 }
 
@@ -58,8 +56,3 @@ check_gitleaks_installed
 execute_gitleaks
 
 
-
-
-
-# /usr/bin/git -C . log -p -U0 --no-merges --first-parent e73a44d998131a96a95fd00b6be333ad5bb3dc09^..317573efbd862d05e4ba5c5fe6a0120c2bb89857
-# /usr/bin/git -C . log -p -U0 --no-merges --first-parent b2c557f1e7b85545ad8b908bc1faf1ebd1ae0c69^..5f7f84de4642ee159fdbee872765aad67ff9a46d
