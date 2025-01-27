@@ -4,7 +4,7 @@ const PORT = 3333
 
 app.get('/', (request, response) => {
     console.log(request)
-    response.append("res", 400);
+    response.append("res", 401);
     response.send('Default Route');
 })
 
