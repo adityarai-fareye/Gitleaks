@@ -21,7 +21,8 @@ jobs:
 
     steps:
       - name: Extract and Print Branch Name
-        run: echo "Branch Name: ${{ github.ref_name }}"
+        run: |
+        echo "Branch Name: ${{ github.ref_name }}"
 
       - name: Checkout code
         uses: actions/checkout@v3
