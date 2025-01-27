@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Extract and Print Branch Name
         run: |
-        echo "Branch Name: ${{ github.ref_name }}"
+          echo "Branch Name: ${{ github.head_ref }}"
 
       - name: Checkout code
         uses: actions/checkout@v3
