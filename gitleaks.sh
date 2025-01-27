@@ -4,7 +4,7 @@ set -e
 
 GITHUB_TOKEN="$1"
 PULL_REQUEST_NUMBER="$2"
-# GITHUB_EVENT="$2"
+BRANCH_NAME="$3"
 
 check_gitleaks_installed() {
     if command -v gitleaks >/dev/null 2>&1; then
@@ -23,7 +23,7 @@ check_gitleaks_installed() {
 execute_gitleaks() {
     echo "gitleaks cmd: gitleaks detect --redact -v --exit-code=2 --log-level=debug --log-opts=--no-merges --first-parent $first_commit_sha^..$last_commit_sha"
     echo "Running Gitleaks..."
-    gitleaks detect --redact -v --exit-code=2 --log-level=debug --log-opts="--no-merges --first-parent $first_commit_sha^..$last_commit_sha --"
+    gitleaks detect --redact -v --exit-code=2 --log-level=debug --log-opts="--no-merges --first-parent $BRANCH_NAME $first_commit_sha^..$last_commit_sha --"
 }
 
 REPO="${GITHUB_REPOSITORY}"

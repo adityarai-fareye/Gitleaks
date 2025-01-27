@@ -20,6 +20,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Print Branch Name
+        run: echo "Branch Name: ${{ github.ref_name }}"
+
+    steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -27,4 +31,4 @@ jobs:
         run: chmod +x ./gitleaks.sh
 
       - name: Run Gitleaks Scan
-        run: ./gitleaks.sh "${{ secrets.GITHUB_TOKEN }}" "${{ github.event.pull_request.number}}"
+        run: ./gitleaks.sh "${{ secrets.GITHUB_TOKEN }}" "${{ github.event.pull_request.number}}" "${{ github.ref_name }}"
