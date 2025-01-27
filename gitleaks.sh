@@ -4,7 +4,6 @@ set -e
 
 GITHUB_TOKEN="$1"
 PULL_REQUEST_NUMBER="$2"
-# GITHUB_EVENT="$2"
 
 check_gitleaks_installed() {
     if command -v gitleaks >/dev/null 2>&1; then
@@ -21,9 +20,8 @@ check_gitleaks_installed() {
 }
 
 execute_gitleaks() {
-    echo "gitleaks cmd: gitleaks detect --redact -v --exit-code=2 --log-level=debug --log-opts=--no-merges $first_commit_sha^..$last_commit_sha"
-    echo "Running Gitleaks..."
-    gitleaks detect --redact -v --exit-code=2 --log-level=debug --log-opts=--no-merges $first_commit_sha^..$last_commit_sha
+    echo "Executing command: gitleaks detect --redact -v --exit-code=2 --log-level=debug --log-opts='--no-merges --first-parent $first_commit_sha^..$last_commit_sha'"
+    gitleaks detect --redact -v --exit-code=2 --log-level=debug --log-opts="--no-merges --first-parent $first_commit_sha^..$last_commit_sha"
 }
 
 REPO="${GITHUB_REPOSITORY}"
@@ -33,9 +31,9 @@ fetch_first_and_last_commit_for_pull_request() {
     echo "GitHub Token: $GITHUB_TOKEN"
 
     commits=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
-      "https://api.github.com/repos/adityarai-fareye/k8Session1/pulls/$PULL_REQUEST_NUMBER/commits")
+      "https://api.github.com/repos/$REPO/pulls/$PULL_REQUEST_NUMBER/commits?per_page=100")
 
-    echo $commits
+    # echo $commits
     if echo "$commits" | jq -e '.[0]' > /dev/null 2>&1; then
         first_commit_sha=$(echo "$commits" | jq -r '.[0].sha')
         
