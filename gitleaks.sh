@@ -23,7 +23,7 @@ check_gitleaks_installed() {
 execute_gitleaks() {
     echo "Executing command: gitleaks detect --redact -v --exit-code=2 --log-level=debug --log-opts='--no-merges --first-parent $BRANCH_NAME $first_commit_sha^..$last_commit_sha'"
     # git log --no-merges --first-parent $first_commit_sha^..$last_commit_sha
-    gitleaks detect --redact -v --exit-code=2 --log-level=debug --log-opts="--no-merges --first-parent branch2 $first_commit_sha^..$last_commit_sha"
+    gitleaks detect --redact -v --exit-code=2 --log-level=debug --log-opts="--no-merges --first-parent $first_commit_sha^..$last_commit_sha"
 }
 
 REPO="${GITHUB_REPOSITORY}"
