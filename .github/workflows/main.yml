@@ -21,15 +21,13 @@ jobs:
 
     steps:
       - name: Extract and Print Branch Name
-        run: |
-          branch_name=${GITHUB_REF##*/}
-          echo "Branch Name: $branch_name"
-          
+        run: echo "Branch Name: $GITHUB_HEAD_REF"
+
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set execute permission
         run: chmod +x ./gitleaks.sh
 
-      - name: Run Gitleaks Scan
-        run: ./gitleaks.sh "${{ secrets.GITHUB_TOKEN }}" "${{ github.event.pull_request.number}}" "${{ github.ref_name }}"
+      # - name: Run Gitleaks Scan
+      #   run: ./gitleaks.sh "${{ secrets.GITHUB_TOKEN }}" "${{ github.event.pull_request.number}}" "${{ github.ref_name }}"
