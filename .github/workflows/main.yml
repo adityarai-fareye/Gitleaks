@@ -13,4 +13,4 @@ jobs:
         run: chmod +x ./gitleaks.sh
 
       - name: Run Gitleaks Scan
-        run: ./run_gitleaks.sh "${{ secrets.GITHUB_TOKEN }}" "${{ github.event.pull_request.number}}"
+        run: ./gitleaks.sh "${{ secrets.GITHUB_TOKEN }}" "${{ github.event.pull_request.number}}"
