@@ -21,8 +21,7 @@ check_gitleaks_installed() {
 }
 
 execute_gitleaks() {
-    echo "gitleaks cmd: gitleaks detect --redact -v --exit-code=2 --log-level=debug --log-opts=--no-merges --first-parent $first_commit_sha^..$last_commit_sha"
-    echo "Running Gitleaks..."
+    echo "Executing command: gitleaks detect --redact -v --exit-code=2 --log-level=debug --log-opts='--no-merges --first-parent $BRANCH_NAME $first_commit_sha^..$last_commit_sha'"
     gitleaks detect --redact -v --exit-code=2 --log-level=debug --log-opts="--no-merges --first-parent $BRANCH_NAME $first_commit_sha^..$last_commit_sha"
 }
 
@@ -35,7 +34,7 @@ fetch_first_and_last_commit_for_pull_request() {
     commits=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
       "https://api.github.com/repos/$REPO/pulls/$PULL_REQUEST_NUMBER/commits")
 
-    echo $commits
+    # echo $commits
     if echo "$commits" | jq -e '.[0]' > /dev/null 2>&1; then
         first_commit_sha=$(echo "$commits" | jq -r '.[0].sha')
         
