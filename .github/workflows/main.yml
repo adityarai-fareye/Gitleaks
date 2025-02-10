@@ -8,15 +8,19 @@ jobs:
     steps:
       - name: Branch Name
         run: |
-          echo "Branch Name: ${{ github.head_ref }}"
-          
+          echo "Branch Name: ${{ github.head_ref }} ${{ github.repository }} ${{ github.event.before }} ${{ github.event.after }}"
+      
+      - name: Pretty Print GitHub Event JSON
+        run: echo '${{ toJson(github) }}'
+
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-         fetch-depth: 0
+          fetch-depth: 0 
 
       - name: Set execute permission
         run: chmod +x ./gitleaks.sh
+    
 
       - name: Run Gitleaks Scan
-        run: ./gitleaks.sh "${{ secrets.GITHUB_TOKEN }}" "${{ github.event.pull_request.number}}"
+        run: ./gitleaks.sh "${{ secrets.GITHUB_TOKEN }}" "${{ github.event.pull_request.number}}" "${{ github.event.after }}"
