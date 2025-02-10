@@ -1,19 +1,5 @@
 name: gitleaks
 on: [pull_request]
-permissions:
-  actions: write
-  attestations: write
-  checks: write
-  contents: write
-  deployments: write
-  discussions: write
-  issues: write
-  packages: write
-  pages: write
-  pull-requests: write
-  repository-projects: write
-  security-events: write
-  statuses: write
 jobs:
  gitleaks_scan:
     name: Gitleaks
@@ -22,17 +8,12 @@ jobs:
     steps:
       - name: Branch Name
         run: |
-          echo "Branch Name: ${{ github.head_ref }}"
+          echo "Branch Name: ${{ github.head_ref }} ${{ github.repository }} ${{ github.event.before }} ${{ github.event.after }}"
 
       - name: Checkout code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0 
-          
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-         fetch-depth: 0
 
       - name: Set execute permission
         run: chmod +x ./gitleaks.sh
