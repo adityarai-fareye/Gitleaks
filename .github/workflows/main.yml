@@ -10,7 +10,7 @@ jobs:
         run: |
           echo "Branch Name: ${{ github.head_ref }} ${{ github.repository }} ${{ github.event.before }} ${{ github.event.after }}"
       
-       - name: Pretty Print GitHub Event JSON
+      - name: Pretty Print GitHub Event JSON
         run: jq '.' "$GITHUB_EVENT_PATH"
 
       - name: Checkout code
