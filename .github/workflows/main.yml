@@ -11,7 +11,7 @@ jobs:
           echo "Branch Name: ${{ github.head_ref }} ${{ github.repository }} ${{ github.event.before }} ${{ github.event.after }}"
       
       - name: Pretty Print GitHub Event JSON
-        run: jq '.' "$GITHUB_EVENT_PATH"
+        run: echo '${{ toJson(github) }}'
 
       - name: Checkout code
         uses: actions/checkout@v3
