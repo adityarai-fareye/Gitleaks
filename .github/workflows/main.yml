@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Branch Name
         run: |
-          echo "Branch Name: ${{ github.head_ref }} ${{ github.repository }} ${{ github.event.before }} ${{ github.event.after }}"
+          echo "Branch Name: ${{ github.head_ref }} ${{ github.repository }} ${{ github.event.before }} ${{ github.event.after }} ${{ github }}"
 
       - name: Checkout code
         uses: actions/checkout@v3
