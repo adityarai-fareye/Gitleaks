@@ -6,17 +6,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Branch Name
-        run: |
-          echo "Branch Name: ${{ github.head_ref }}"
-          
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: adtyarai/gitleaks-action1@v4.0.0
         with:
-         fetch-depth: 0
-
-      - name: Set execute permission
-        run: chmod +x ./gitleaks.sh
-
-      - name: Run Gitleaks Scan
-        run: ./gitleaks.sh "${{ secrets.GITHUB_TOKEN }}" "${{ github.event.pull_request.number}}"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pull_request_number: ${{ github.event.pull_request.number }}
+          github_repository: ${{ github.repository }}
+          latest_commit: ${{ github.event.after }}
