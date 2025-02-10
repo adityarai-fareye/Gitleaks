@@ -4,6 +4,7 @@ set -e
 
 GITHUB_TOKEN="$1"
 PULL_REQUEST_NUMBER="$2"
+LATEST_COMMIT="$3"
 
 check_gitleaks_installed() {
     if command -v gitleaks >/dev/null 2>&1; then
@@ -36,8 +37,9 @@ fetch_first_and_last_commit_for_pull_request() {
     # echo $commits
     if echo "$commits" | jq -e '.[0]' > /dev/null 2>&1; then
         first_commit_sha=$(echo "$commits" | jq -r '.[0].sha')
+        last_commit_sha=$LATEST_COMMIT
         
-        last_commit_sha=$(echo "$commits" | jq -r '.[-1].sha')
+        # last_commit_sha=$(echo "$commits" | jq -r '.[-1].sha')
         
         echo "The first commit SHA is: $first_commit_sha"
         echo "The last commit SHA is: $last_commit_sha"

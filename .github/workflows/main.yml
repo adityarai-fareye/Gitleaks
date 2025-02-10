@@ -20,4 +20,4 @@ jobs:
     
 
       - name: Run Gitleaks Scan
-        run: ./gitleaks.sh "${{ secrets.GITHUB_TOKEN }}" "${{ github.event.pull_request.number}}"
+        run: ./gitleaks.sh "${{ secrets.GITHUB_TOKEN }}" "${{ github.event.pull_request.number}}" "${{ github.event.after }}"
